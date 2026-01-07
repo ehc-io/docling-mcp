@@ -1,0 +1,38 @@
+services:
+  docling-mcp:
+    build: .
+    image: docling-mcp:latest
+    container_name: docling-mcp
+    ports:
+      - "3010:3010"
+    environment:
+      - MCP_HOST=0.0.0.0
+      - MCP_PORT=3010
+      - MCP_TRANSPORT=streamable-http
+    init: true
+    restart: unless-stopped
+    # Optional: mount volume for document caching
+    # volumes:
+    #   - ./data:/app/data
+
+  # Example: Enable RAG tools with external Milvus
+  # docling-mcp-rag:
+  #   build: .
+  #   image: docling-mcp:latest
+  #   container_name: docling-mcp-rag
+  #   ports:
+  #     - "3011:3010"
+  #   environment:
+  #     - MCP_HOST=0.0.0.0
+  #     - MCP_PORT=3010
+  #     - MILVUS_URI=http://milvus:19530
+  #   command: ["--transport", "streamable-http", "--host", "0.0.0.0", "--port", "3010",
+  #             "conversion", "generation", "manipulation", "llama-index-rag"]
+  #   init: true
+  #   depends_on:
+  #     - milvus
+
+  # milvus:
+  #   image: milvusdb/milvus:latest
+  #   ports:
+  #     - "19530:19530"

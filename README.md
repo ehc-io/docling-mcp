@@ -62,6 +62,23 @@ Depending on the transfer protocol required, specify the argument `--transport`,
 
 More options are available, e.g. the selection of which toolgroup to launch. Use the `--help` argument to inspect all the CLI options.
 
+### Running with Docker
+
+Run Docling MCP as a containerized service:
+
+```bash
+docker compose up -d
+```
+
+This starts the MCP server on port 3010 with `streamable-http` transport. Connect your MCP client:
+
+```bash
+# Claude Code CLI
+claude mcp add --transport http docling http://localhost:3010/mcp
+```
+
+See [usecases.md](usecases.md) for more client configuration examples and available tools.
+
 For developing the MCP tools further, please refer to the [docs/development.md](docs/development.md) page for instructions.
 
 ## Integration with MCP clients
